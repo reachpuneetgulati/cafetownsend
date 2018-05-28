@@ -1,0 +1,33 @@
+{
+  "siteVersions":[
+    {
+      "version":"1",
+      "dateFormats":[
+        {"label":"dateFormatStartDate","value":"(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])"}
+      ],
+      "byConstants":[
+        {"label":"xpathUserName", "value":"//span[contains(text(),'Username')]/following-sibling::input[1]"},
+        {"label":"xpathPassword", "value":"//span[contains(text(),'Password')]/following-sibling::input[1]"},
+        {"label":"xpathLoginButton", "value":"//button[contains(text(),'Login')]"},
+        {"label":"xpathLoginErrorMessage", "value":"//p[contains(text(),'Invalid username or password!')]"},
+        {"label":"xpathGreetings", "value":"//p[@id='greetings']"},
+        {"label":"xpathLogoutButton", "value":"//p[contains(text(),'Logout')]"},
+        {"label":"xpathCreate", "value":"//a[@id='bAdd']"},
+        {"label":"xpathEdit", "value":"//a[@id='bEdit']"},
+        {"label":"xpathDelete", "value":"//a[@id='bDelete']"},
+        {"label":"xpathEmployeeList", "value":"//ul[@id='employee-list']"},
+        {"label":"xpathAddFirstName", "value":"//span[contains(text(),'First name:')]/following-sibling::input[1]"},
+        {"label":"xpathAddLastName", "value":"//span[contains(text(),'Last name:')]/following-sibling::input[1]"},
+        {"label":"xpathAddStartDate", "value":"//span[contains(text(),'Start date:')]/following-sibling::input[1]"},
+        {"label":"xpathAddEmail", "value":"//span[contains(text(),'Email:')]/following-sibling::input[1]"},
+        {"label":"xpathAddButton", "value":"//button[contains(text(),'Add')]"},
+        {"label":"xpathEmployeeElement","value":"//ul[@id='employee-list']/descendant::li[text() = %1$s]"},
+        {"label":"xpathFirstEmployee","value":"//ul[@id='employee-list']/descendant::li[1]"},
+        {"label":"xpathAllEmployee","value":"//ul[@id='employee-list']/descendant::li"},
+        {"label":"xpathUpdateButton", "value":"//button[contains(text(),'Update')]"},
+        {"label":"xpathDeleteButton", "value":"//p[contains(text(),'Delete')]"},
+        {"label":"xpathBackButton", "value":"//a[contains(text(),'Back')]"}
+      ]
+    }
+  ]
+}
