@@ -18,7 +18,8 @@ Feature: Edit Entries
     And User changes "LastName" to "Ricciardo"
     And User clicks on Update
     Then The employee details are changed to firstname as "Daniel" and lastname as "Ricciardo"
-    Then Clear data created with firstname as "Daniel" and lastname as "Ricciardo"
+    And Clear data created with firstname as "Fernando" and lastname as "Alonso"
+    And Clear data created with firstname as "Daniel" and lastname as "Ricciardo"
 
   Scenario: User should be able to delete employee details through edit page
     Given User has logged in

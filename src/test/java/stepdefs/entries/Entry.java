@@ -2,7 +2,6 @@ package stepdefs.entries;
 
 import common.Constants;
 import common.Settings;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -145,5 +144,10 @@ public class Entry {
         LandingPage.getInstance(mSettings).LogOut();
         LoginPage.getInstance(mSettings).LoginWithUsernameAndPassword("Luke","Skywalker");
         LandingPage.getInstance(mSettings).DeleteRecordsWithName(fname.concat(" ").concat(lname));
+    }
+
+    @Then("^Employee is not saved and user stays on add employee screen$")
+    public void employeeIsNotSavedAndUserStaysOnAddEmployee() {
+        Assert.assertTrue(AddEmployeePage.getInstance(mSettings).IsAddEmailVisible(),"Employee details saved when they shouldn't");
     }
 }

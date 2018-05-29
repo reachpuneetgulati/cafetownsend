@@ -2,14 +2,12 @@ package pages;
 
 import common.Browser;
 import common.Settings;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmployeeDetailPage extends BasePage {
@@ -107,10 +105,6 @@ public class EmployeeDetailPage extends BasePage {
         }
         try {
             new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_ADDSTARTDATE)));
-            if (!verifyStartDateFormat(sdate)){
-                EmployeeDetailPage.LOG.error("Can not add start date. Start date not in correct format");
-                return;
-            }
         }catch (Exception e){
             EmployeeDetailPage.LOG.error("Can not add start date. Start date field is not visible");
             return;
@@ -119,31 +113,18 @@ public class EmployeeDetailPage extends BasePage {
         Browser.getInstance().findElement(By.xpath(XPATH_ADDSTARTDATE)).sendKeys(sdate);
     }
 
-    private boolean verifyStartDateFormat(String sdate) {
-        Matcher matcher = STARTDATEPATTERN.matcher(sdate);
-        return matcher.matches();
-    }
-
     public void AddEmail(String email) {
         if (EmployeeDetailPage.LOG.isDebugEnabled()){
             EmployeeDetailPage.LOG.debug("Adding the email:::"+email);
         }
         try {
             new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_ADDEMAIL)));
-            if (!verifyEmailAddress(email)){
-                EmployeeDetailPage.LOG.error("Can not add email. Email id not in correct format");
-                return;
-            }
         }catch (Exception e){
             EmployeeDetailPage.LOG.error("Can not add email. Email field is not visible");
             return;
         }
         Browser.getInstance().findElement(By.xpath(XPATH_ADDEMAIL)).clear();
         Browser.getInstance().findElement(By.xpath(XPATH_ADDEMAIL)).sendKeys(email);
-    }
-
-    private boolean verifyEmailAddress(String email) {
-        return EmailValidator.getInstance().isValid(email);
     }
 
     static {

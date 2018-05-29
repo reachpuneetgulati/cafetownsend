@@ -25,21 +25,20 @@ Feature: Add Entries
       |Dummy         |User     |2018-07-01|dummyuser@gmail.com|
       |Dummy         |User     |2018-07-01|dummyuser@gmail.com|
 
-    Scenario: User should be able to edit employee details
+    Scenario Outline: Employee with illegal or blank details should not be saved
       Given User has logged in
       And User clicks "Create" button
       Then User is presented with a form to enter employee details
-      When User provides firstname as "Fernando" , lastname as "Alonso", startdate as "2018-07-01" and email as "lamatador@gmail.com"
+      When User provides firstname as "<firstname>" , lastname as "<lastname>", startdate as "<startdate>" and email as "<email>"
       And User click on Add
-      Then The employee details are saved and present in the employee list with first name "Fernando", last name "Alonso", start date "2018-07-01" and email as "lamatador@gmail.com"
-      When The user clicks on an employee with first name "Fernando" and lastname "Alonso"
-      And User clicks "Edit" button
-      Then User is shown the edit screen
-      When User changes "FirstName" to "Daniel"
-      And User changes "LastName" to "Ricciardo"
-      And User clicks on Update
-      Then The employee details are changed to firstname as "Daniel" and lastname as "Ricciardo"
-      And Clear data created with firstname as "Fernando" and lastname as "Alonso"
-      And Clear data created with firstname as "Daniel" and lastname as "Ricciardo"
-
+      Then Employee is not saved and user stays on add employee screen
+      Examples:
+        | firstname    | lastname| startdate|email              |
+        |              |         |          |                   |
+        |              |Last     |2018-07-01|firstlast@gmail.com|
+        |First         |         |2018-07-01|firstlast@gmail.com|
+        |First         |Last     |          |firstlast@gmail.com|
+        |First         |Last     |2018-07-01|                   |
+        |First         |Last     |01-07-2018|firstlast@gmail.com|
+        |First         |Last     |2018-07-01|firstlast@gmail    |
 
