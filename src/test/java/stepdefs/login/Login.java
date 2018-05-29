@@ -2,6 +2,7 @@ package stepdefs.login;
 
 import common.Constants;
 import common.Settings;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -47,7 +48,7 @@ public class Login {
         if (msg.equals(Constants.LoginWarning.WRONGCREDENTIALS.getMessage())){
             Assert.assertTrue(LoginPage.getInstance(mSettings).IsInValidLogin(),"Invalid username or password");
         }else if (msg.equals(Constants.LoginWarning.EMPTYVALUE.getMessage())){
-            Assert.assertTrue(LoginPage.getInstance(mSettings).IsCredentialNotProvided(),"Please enter some value");
+            throw new PendingException("Not implemented yet");
         }
     }
 
@@ -61,5 +62,10 @@ public class Login {
         Assert.assertTrue(LandingPage.getInstance(mSettings).IsCreateButtonVisibleAndEnabled(),"Not logged in successfully");
         Assert.assertTrue(LandingPage.getInstance(mSettings).IsEditButtonVisible(),"Not logged in successfully");
         Assert.assertTrue(LandingPage.getInstance(mSettings).IsDeleteButtonVisible(),"Not logged in successfully");
+    }
+
+    @When("^User tries to go to \"([^\"]*)\"$")
+    public void userTriesToGoTo(String site) {
+        LoginPage.getInstance(mSettings).GoTo(site);
     }
 }

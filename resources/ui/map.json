@@ -15,7 +15,7 @@
         {"label":"xpathCreate", "value":"//a[@id='bAdd']"},
         {"label":"xpathEdit", "value":"//a[@id='bEdit']"},
         {"label":"xpathDelete", "value":"//a[@id='bDelete']"},
-        {"label":"xpathEmployeeList", "value":"//ul[@id='employee-list']"},
+        {"label":"xpathEmployeeListContainer", "value":"//div[@id='employee-list-container']"},
         {"label":"xpathAddFirstName", "value":"//span[contains(text(),'First name:')]/following-sibling::input[1]"},
         {"label":"xpathAddLastName", "value":"//span[contains(text(),'Last name:')]/following-sibling::input[1]"},
         {"label":"xpathAddStartDate", "value":"//span[contains(text(),'Start date:')]/following-sibling::input[1]"},
@@ -23,7 +23,7 @@
         {"label":"xpathAddButton", "value":"//button[contains(text(),'Add')]"},
         {"label":"xpathEmployeeElement","value":"//ul[@id='employee-list']/descendant::li[text() = %1$s]"},
         {"label":"xpathFirstEmployee","value":"//ul[@id='employee-list']/descendant::li[1]"},
-        {"label":"xpathAllEmployee","value":"//ul[@id='employee-list']/descendant::li"},
+        {"label":"xpathAllEmployee","value":"//div[@id='employee-list-container']/descendant::li"},
         {"label":"xpathUpdateButton", "value":"//button[contains(text(),'Update')]"},
         {"label":"xpathDeleteButton", "value":"//p[contains(text(),'Delete')]"},
         {"label":"xpathBackButton", "value":"//a[contains(text(),'Back')]"}

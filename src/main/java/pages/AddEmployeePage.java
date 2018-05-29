@@ -36,7 +36,6 @@ public class AddEmployeePage extends EmployeeDetailPage {
             pauseExecution();
         }catch (Exception e){
             AddEmployeePage.LOG.error("Can not submit details. Add button is not visible");
-            return;
         }
     }
 

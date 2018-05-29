@@ -1,15 +1,11 @@
-// 
-// Decompiled by Procyon v0.5.30
-// 
 
 package common;
 
-import pages.LoginPage;
-import sun.rmi.runtime.Log;
 
 public class Constants
 {
-    public static final String SCREENSHOT_DIRECTORY = "screenshot.directory";
+    static final String SCREENSHOT_DIRECTORY = "screenshot.directory";
+    static final String USE_BROWSER = "use.browser";
 
     public enum Driver
     {
@@ -21,7 +17,7 @@ public class Constants
         private String driverHome;
         private String driver;
         
-        private Driver(final String browserHome, final String driverHome, final String driver) {
+        Driver(final String browserHome, final String driverHome, final String driver) {
             this.browserHome = browserHome;
             this.driverHome = driverHome;
             this.driver = driver;
@@ -58,6 +54,6 @@ public class Constants
 
     public enum UserOptions
     {
-        CREATE,EDIT,DELETE;
+        CREATE,EDIT,DELETE
     }
 }

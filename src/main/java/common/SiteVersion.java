@@ -16,7 +16,7 @@ public class SiteVersion {
         this.byConstants = byConstants;
     }
 
-    public static Integer getBestIndexFromList(int version, ArrayList<SiteVersion> versions) {
+    static Integer getBestIndexFromList(int version, ArrayList<SiteVersion> versions) {
 
         final ArrayList<SiteVersion> vs = new ArrayList<SiteVersion>(versions);
         Collections.reverse(vs);
@@ -42,7 +42,7 @@ public class SiteVersion {
         return byConstants;
     }
 
-    public String getByConstant(final String name){
+    String getByConstant(final String name){
         for (final LabelValue by : this.byConstants) {
             if (by.getLabel().equals(name)) {
                 return by.getValue();
@@ -51,7 +51,7 @@ public class SiteVersion {
         return null;
     }
 
-    public String getDateFormat(final String name){
+    String getDateFormat(final String name){
         for (final LabelValue by : this.dateFormats) {
             if (by.getLabel().equals(name)) {
                 return by.getValue();

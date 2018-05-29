@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class Settings {
 
-    private WebDriver mDriver;
     private String mMasterWindowHandle;
     private static ArrayList<SiteVersion> mAllVersions;
     private static ArrayList<SiteVersion> mVersions;
@@ -24,12 +23,10 @@ public class Settings {
     public Settings(@JsonProperty("siteVersions") ArrayList<SiteVersion> versions) {
         Settings.mVersions = versions;
         Settings.mAllVersions = new ArrayList<SiteVersion>();
-        for (SiteVersion version : versions){
-            Settings.mAllVersions.add(version);
-        }
+        Settings.mAllVersions.addAll(versions);
     }
 
-    public static Settings initialize(){
+    static Settings initialize(){
         InputStream in = null;
         try {
             File file = new File("./resources/ui/map.json");
@@ -37,7 +34,7 @@ public class Settings {
             return (Settings)new ObjectMapper().readValue(in, (Class)Settings.class);
         }
         catch (Exception e) {
-            Settings.LOG.error((Object)"Error processing metadata.json resource", (Throwable)e);
+            Settings.LOG.error((Object)"Error processing metadata.json resource", e);
         }
         finally {
             IOUtils.closeQuietly(in);
@@ -59,11 +56,7 @@ public class Settings {
         return null;
     }
 
-    public WebDriver getDriver(){
-        return mDriver;
-    }
-
-    public static int getVersion() {
+    private static int getVersion() {
         return Settings.version;
     }
 
@@ -81,25 +74,21 @@ public class Settings {
         return null;
     }
 
-    public WebDriver getmDriver() {
-        return mDriver;
-    }
-
     public String getmMasterWindowHandle() {
         return mMasterWindowHandle;
     }
 
-    public void setmMasterWindowHandle(String mMasterWindowHandle) {
+    private void setmMasterWindowHandle(String mMasterWindowHandle) {
         this.mMasterWindowHandle = mMasterWindowHandle;
     }
+
     public void setmDriver(WebDriver mDriver) {
-        this.mDriver = mDriver;
-        this.setmMasterWindowHandle(this.mDriver.getWindowHandle());
+        this.setmMasterWindowHandle(mDriver.getWindowHandle());
     }
 
 
-    public void setVersion(int version) {
-        this.version = version;
+    void setVersion(int version) {
+        Settings.version = version;
     }
 
     static {

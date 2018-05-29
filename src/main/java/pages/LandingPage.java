@@ -17,9 +17,8 @@ public class LandingPage extends BasePage{
     private static final String XPATH_CREATE;
     private static final String XPATH_EDIT;
     private static final String XPATH_DELETE;
-    private static final String XPATH_EMPLOYEELIST;
+    private static final String XPATH_EMPLOYEELISTCONTAINER;
     private static final String XPATH_ALLEMPLOYEE;
-    private static final String XPATH_FIRSTEMPLOYEE;
     private final Settings mSettings;
 
     public LandingPage(Settings settings) {
@@ -83,7 +82,7 @@ public class LandingPage extends BasePage{
             LandingPage.LOG.debug("Verifying Employee list is shown after logging in");
         }
         try {
-            return new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELIST))).isDisplayed();
+            return new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELISTCONTAINER))).isDisplayed();
         }catch (Exception e){
             LandingPage.LOG.error("Employee list not visible");
         }
@@ -133,7 +132,7 @@ public class LandingPage extends BasePage{
             LandingPage.LOG.debug("Verifying Employee is not present:::name:::"+name);
         }
         try {
-            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELIST)));
+            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELISTCONTAINER)));
         }catch (Exception e){
             LandingPage.LOG.error("Employee list not present");
             return false;
@@ -153,7 +152,7 @@ public class LandingPage extends BasePage{
             LandingPage.LOG.debug("Verifying Employee is created with details as:::firstname:::"+fname+":::lastname:::"+lname+":::startdate:::"+startdate+":::email:::"+email);
         }
         try {
-            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELIST)));
+            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELISTCONTAINER)));
         }catch (Exception e){
             LandingPage.LOG.error("Employee list not present");
             return false;
@@ -175,7 +174,7 @@ public class LandingPage extends BasePage{
             LandingPage.LOG.debug("Verifying only one employee exists with name:::"+name);
         }
         try {
-            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELIST)));
+            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELISTCONTAINER)));
         }catch (Exception e){
             LandingPage.LOG.error("Employee list not present");
             return false;
@@ -198,14 +197,19 @@ public class LandingPage extends BasePage{
     }
 
     private void deleteRecordsWithName(String name) {
-        List<WebElement> list = Browser.getInstance().findElements(By.xpath(XPATH_ALLEMPLOYEE));
-        for (WebElement element : list){
+        pauseExecution();
+        WebElement listcontainer = Browser.getInstance().findElement(By.xpath(XPATH_EMPLOYEELISTCONTAINER));
+        List<WebElement> list = listcontainer.findElements(By.xpath(XPATH_ALLEMPLOYEE));
+        int count = list.size();
+        for (int i = count-1; i >= 0 ;i--){
+            WebElement element = list.get(i);
             if (element.getText().equals(name)){
                 element.click();
                 Browser.getInstance().findElement(By.xpath(XPATH_DELETE)).click();
                 Browser.getInstance().switchTo().alert().accept();
                 pauseExecution();
                 Browser.getInstance().switchTo().defaultContent();
+                pauseExecution();
             }
         }
     }
@@ -215,7 +219,7 @@ public class LandingPage extends BasePage{
             LandingPage.LOG.debug("Selecting employee with name:::"+name);
         }
         try {
-            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELIST)));
+            new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_EMPLOYEELISTCONTAINER)));
         }catch (Exception e){
             LandingPage.LOG.error("Employee list not present");
             return;
@@ -228,7 +232,7 @@ public class LandingPage extends BasePage{
         }
     }
 
-    public void DeleteRecordsWithName(String name) throws InterruptedException {
+    public void DeleteRecordsWithName(String name) {
         deleteRecordsWithName(name);
     }
 
@@ -283,9 +287,8 @@ public class LandingPage extends BasePage{
         XPATH_CREATE = Settings.getXpath("xpathCreate");
         XPATH_EDIT = Settings.getXpath("xpathEdit");
         XPATH_DELETE = Settings.getXpath("xpathDelete");
-        XPATH_EMPLOYEELIST = Settings.getXpath("xpathEmployeeList");
+        XPATH_EMPLOYEELISTCONTAINER = Settings.getXpath("xpathEmployeeListContainer");
         XPATH_ALLEMPLOYEE= Settings.getXpath("xpathAllEmployee");
-        XPATH_FIRSTEMPLOYEE = Settings.getXpath("xpathFirstEmployee");
     }
 
 }

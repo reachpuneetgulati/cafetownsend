@@ -1,7 +1,6 @@
 package stepdefs.hooks;
 
 import common.Browser;
-import common.Constants;
 import common.InitSystem;
 import common.Settings;
 import cucumber.api.Scenario;
@@ -24,7 +23,7 @@ public class Hooks {
         if (Hooks.LOG.isDebugEnabled()){
             Hooks.LOG.debug("Starting scenario::::".concat(scenario.getName()));
         }
-        mSettings = new InitSystem().WithBrowser(Constants.Driver.FIREFOX).Init();
+        mSettings = new InitSystem().Init();
     }
 
     @After

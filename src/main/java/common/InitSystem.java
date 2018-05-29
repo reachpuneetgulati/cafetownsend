@@ -20,23 +20,23 @@ public class InitSystem {
     }
 
     public Settings Init(){
-        if (mDriver == null)
-            return null;
         Settings settings = Settings.initialize();
         Properties properties = loadProperties();
-        settings.setVersion(Integer.parseInt(properties.getProperty("site.version")));
-        Browser.initBrowser(this.mDriver,properties);
+        if (settings != null) {
+            settings.setVersion(Integer.parseInt(properties.getProperty("site.version","1")));
+        }
+        Browser.initBrowser(Constants.Driver.valueOf(properties.getProperty(Constants.USE_BROWSER,"FIREFOX")),properties);
         return settings;
     }
 
     private Properties loadProperties() {
-        InputStream inputStream = null;
+        InputStream inputStream;
         Properties props = new Properties();
         try {
             inputStream = new FileInputStream(new File("./resources/config/config.properties"));
             props.load(inputStream);
         }
-        catch (Exception ex) {}
+        catch (Exception ignored) {}
         return props;
     }
 }

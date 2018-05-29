@@ -1,7 +1,6 @@
 package pages;
 
 import common.Browser;
-import org.openqa.selenium.JavascriptExecutor;
 
 public class BasePage {
 

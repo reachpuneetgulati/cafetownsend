@@ -32,7 +32,7 @@ public class Browser {
         return mDriver;
     }
 
-    public static void initBrowser(Driver driver, Properties properties) {
+    static void initBrowser(Driver driver, Properties properties) {
 
         mScreenshotDirectory = properties.getProperty(Constants.SCREENSHOT_DIRECTORY);
         switch (driver){
@@ -42,14 +42,14 @@ public class Browser {
                 System.setProperty("webdriver.chrome.args", "--disable-logging");
                 System.setProperty("webdriver.chrome.silentOutput", "true");
                 final ChromeOptions co = new ChromeOptions();
-                co.addArguments(new String[] { "--disable-extensions" });
-                co.addArguments(new String[] { "no-sandbox" });
-                if (StringUtils.isNotBlank((CharSequence)properties.getProperty(Constants.Driver.CHROME.getBrowserHome()))) {
+                co.addArguments("--disable-extensions");
+                co.addArguments("no-sandbox");
+                if (StringUtils.isNotBlank(properties.getProperty(Driver.CHROME.getBrowserHome()))) {
                     co.setBinary(FilenameUtils.separatorsToSystem(properties.getProperty(Constants.Driver.CHROME.getBrowserHome())));
-                    co.addArguments(new String[] { "--disable-extensions" });
-                    co.addArguments(new String[] { "no-sandbox" });
+                    co.addArguments("--disable-extensions");
+                    co.addArguments("no-sandbox");
                 }
-                mDriver = (WebDriver)new ChromeDriver(co);
+                mDriver = new ChromeDriver(co);
                 mDriver.manage().timeouts().implicitlyWait(60L,TimeUnit.SECONDS);
                 mDriver.manage().timeouts().pageLoadTimeout(60L,TimeUnit.SECONDS);
             }
@@ -72,7 +72,7 @@ public class Browser {
                 prof.setPreference("startup.homepage_welcome_url.additional", "about:blank");
                 FirefoxOptions ffo = new FirefoxOptions();
                 ffo.setProfile(prof);
-                if (!StringUtils.isBlank((CharSequence)properties.getProperty(Constants.Driver.FIREFOX.getBrowserHome()))) {
+                if (!StringUtils.isBlank(properties.getProperty(Driver.FIREFOX.getBrowserHome()))) {
                     final File pathToBinary = new File(FilenameUtils.separatorsToSystem(properties.getProperty(Constants.Driver.FIREFOX.getBrowserHome())));
                     final FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
                     ffo.setBinary(ffBinary);
@@ -91,11 +91,11 @@ public class Browser {
             mDriver.manage().window().maximize();
             mDriver.manage().timeouts().setScriptTimeout(10L,TimeUnit.SECONDS);
         }
-        catch (Exception ex) {}
+        catch (Exception ignored) {}
     }
 
     private static String determineDriverHome(final Constants.Driver driver, Properties props) {
-        if (StringUtils.isNotBlank((CharSequence)props.getProperty(driver.getDriverHome()))) {
+        if (StringUtils.isNotBlank(props.getProperty(driver.getDriverHome()))) {
             return FilenameUtils.separatorsToSystem(props.getProperty(driver.getDriverHome()));
         }
         return FilenameUtils.separatorsToSystem("./resources/drivers/" + driver.getDriver());

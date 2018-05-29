@@ -28,3 +28,8 @@ Feature: Login
        | Luke        |            | Please fill out this field.       |
        |             |            | Please fill out this field.       |
        |             | Skywalker  | Please fill out this field.       |
+
+  Scenario: User should not be presented with the employee list if it navigates to employees page
+     directly through browser
+    When User tries to go to "http://cafetownsend-angular-rails.herokuapp.com/employees"
+    Then User should see the fields to enter username, password and login button

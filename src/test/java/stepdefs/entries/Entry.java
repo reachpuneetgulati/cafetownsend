@@ -12,7 +12,6 @@ import pages.AddEmployeePage;
 import pages.EditEmployeePage;
 import pages.LandingPage;
 import pages.LoginPage;
-import stepdefs.login.Login;
 
 public class Entry {
     private Settings mSettings;
@@ -105,11 +104,6 @@ public class Entry {
         Assert.assertTrue(LandingPage.getInstance(mSettings).VerifyEmployeePresent(fname,lname,null,null),"Error creating the employee");
     }
 
-    @Then("^User makes sure no entry is present with firstname as \"([^\"]*)\" and lastname as \"([^\"]*)\"$")
-    public void userMakesSureNoEntryIsPresentWithFirstnameAsAndLastnameAs(String fname, String lname) throws InterruptedException {
-        LandingPage.getInstance(mSettings).DeleteRecordsWithName(fname.concat(" ").concat(lname));
-    }
-
     @When("^User clicks on Delete and \"([^\"]*)\" to delete$")
     public void userClicksOnDeleteAndToDelete(String action) {
         if (action.equals("Accept")){
@@ -136,13 +130,6 @@ public class Entry {
         EditEmployeePage.getInstance(mSettings).ClickBackButton();
     }
 
-
-    @When("^User selects Cancel$")
-    public void userSelectsCancel() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
     @When("^User selects ok$")
     public void userSelectsOk() {
         LandingPage.getInstance(mSettings).OKDeleteConfirmation();
@@ -151,5 +138,12 @@ public class Entry {
     @And("^User selects Cancel when user is shown confirmation to delete employee$")
     public void userSelectsCancelWhenUserIsShownConfirmationToDeleteEmployee() {
         LandingPage.getInstance(mSettings).CancelDeleteConfirmation();
+    }
+
+    @And("^Clear data created with firstname as \"([^\"]*)\" and lastname as \"([^\"]*)\"$")
+    public void clearDataCreatedWithFirstnameAsAndLastnameAs(String fname, String lname){
+        LandingPage.getInstance(mSettings).LogOut();
+        LoginPage.getInstance(mSettings).LoginWithUsernameAndPassword("Luke","Skywalker");
+        LandingPage.getInstance(mSettings).DeleteRecordsWithName(fname.concat(" ").concat(lname));
     }
 }

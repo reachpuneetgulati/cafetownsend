@@ -27,7 +27,7 @@ public class LoginPage {
     }
 
     static{
-        LOG = LogManager.getLogger((Class)LoginPage.class);
+        LOG = LogManager.getLogger(LoginPage.class);
         XPATH_USERNAME = Settings.getXpath("xpathUserName");
         XPATH_PASSWORD = Settings.getXpath("xpathPassword");
         XPATH_LOGINBUTTON = Settings.getXpath("xpathLoginButton");
@@ -42,6 +42,16 @@ public class LoginPage {
             Browser.getInstance().get("http://cafetownsend-angular-rails.herokuapp.com/login");
         }catch (Exception e){
             LoginPage.LOG.error("Can't navigate to the login page");
+        }
+    }
+    public void GoTo(String site) {
+        if (LoginPage.LOG.isDebugEnabled()){
+            LoginPage.LOG.debug("Navigating to page:::"+site);
+        }
+        try {
+            Browser.getInstance().get(site);
+        }catch (Exception e){
+            LoginPage.LOG.error("Can't navigate to the page:::"+site);
         }
     }
 
@@ -138,12 +148,7 @@ public class LoginPage {
         if (LoginPage.LOG.isDebugEnabled()){
             LoginPage.LOG.debug("Checking for empty credentials message");
         }
-        try {
-            return new WebDriverWait(Browser.getInstance(),30L).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("//span.error.ng-hide]"))).isDisplayed();
-        }catch (Exception e){
-            LoginPage.LOG.error("Credentials provided");
-            return false;
-        }
+        return false;
     }
 
     public void LoginWithUsernameAndPassword(String username, String password) {
@@ -164,4 +169,5 @@ public class LoginPage {
         Browser.getInstance().findElement(By.xpath(XPATH_PASSWORD)).sendKeys(password);
         Browser.getInstance().findElement(By.xpath(XPATH_LOGINBUTTON)).click();
     }
+
 }

@@ -18,11 +18,11 @@ Feature: Edit Entries
     And User changes "LastName" to "Ricciardo"
     And User clicks on Update
     Then The employee details are changed to firstname as "Daniel" and lastname as "Ricciardo"
-    Then User makes sure no entry is present with firstname as "Daniel" and lastname as "Ricciardo"
+    Then Clear data created with firstname as "Daniel" and lastname as "Ricciardo"
 
   Scenario: User should be able to delete employee details through edit page
     Given User has logged in
-    Then User makes sure no entry is present with firstname as "Fernando" and lastname as "Alonso"
+    Then Clear data created with firstname as "Fernando" and lastname as "Alonso"
     And User clicks "Create" button
     Then User is presented with a form to enter employee details
     When User provides firstname as "Fernando" , lastname as "Alonso", startdate as "2018-07-01" and email as "lamatador@gmail.com"
@@ -40,7 +40,7 @@ Feature: Edit Entries
 
   Scenario: User should be able to delete employee details through employee list
     Given User has logged in
-    Then User makes sure no entry is present with firstname as "Fernando" and lastname as "Alonso"
+    Then Clear data created with firstname as "Fernando" and lastname as "Alonso"
     And User clicks "Create" button
     Then User is presented with a form to enter employee details
     When User provides firstname as "Fernando" , lastname as "Alonso", startdate as "2018-07-01" and email as "lamatador@gmail.com"

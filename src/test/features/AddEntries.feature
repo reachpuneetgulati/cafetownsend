@@ -11,7 +11,7 @@ Feature: Add Entries
     When User provides firstname as "Ant" , lastname as "Man", startdate as "2018-07-01" and email as "antman@gmail.com"
     And User click on Add
     Then The employee details are saved and present in the employee list with first name "Ant", last name "Man", start date "2018-07-01" and email as "antman@gmail.com"
-    Then User makes sure no entry is present with firstname as "Ant" and lastname as "Man"
+    Then Clear data created with firstname as "Ant" and lastname as "Man"
 
   Scenario Outline: Employee should not be created with the same details
     Given User has logged in
@@ -39,4 +39,7 @@ Feature: Add Entries
       And User changes "LastName" to "Ricciardo"
       And User clicks on Update
       Then The employee details are changed to firstname as "Daniel" and lastname as "Ricciardo"
+      And Clear data created with firstname as "Fernando" and lastname as "Alonso"
+      And Clear data created with firstname as "Daniel" and lastname as "Ricciardo"
+
 
