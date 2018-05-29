@@ -9,13 +9,15 @@ import cucumber.api.java.en.When;
 import org.testng.Assert;
 import pages.LandingPage;
 import pages.LoginPage;
+import stepdefs.base.BaseStep;
+import stepdefs.hooks.Hooks;
 
-public class Login {
+public class Login extends BaseStep {
 
     private Settings mSettings;
 
-    public Login(Settings settings){
-        this.mSettings=settings;
+    public Login(BaseStep step){
+        this.mSettings=step.getmSettings();
     }
 
 

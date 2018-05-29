@@ -5,12 +5,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import pages.LoginPage;
+import stepdefs.base.BaseStep;
 
-public class CommonSteps {
+public class CommonSteps extends BaseStep {
     private Settings mSettings;
 
-    public CommonSteps(Settings settings){
-        this.mSettings = settings;
+    public CommonSteps(BaseStep step){
+        this.mSettings = step.getmSettings();
     }
 
     @Given("^I am logged in to the website with username \"([^\"]*)\" and password \"([^\"]*)\"$")

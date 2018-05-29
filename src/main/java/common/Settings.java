@@ -19,6 +19,15 @@ public class Settings {
     private static ArrayList<SiteVersion> mVersions;
     private static int version;
     private static Logger LOG;
+    private String mHomepage;
+
+    public String getmHomepage() {
+        return mHomepage;
+    }
+
+    public void setmHomepage(String mHomepage) {
+        this.mHomepage = mHomepage;
+    }
 
     public Settings(@JsonProperty("siteVersions") ArrayList<SiteVersion> versions) {
         Settings.mVersions = versions;

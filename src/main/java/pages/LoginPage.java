@@ -36,12 +36,13 @@ public class LoginPage {
 
     public void GoTo() {
         if (LoginPage.LOG.isDebugEnabled()){
-            LoginPage.LOG.debug("Navigating to login page");
+            LoginPage.LOG.debug("Navigating to login page"+mSettings.getmHomepage());
         }
         try {
-            Browser.getInstance().get("http://cafetownsend-angular-rails.herokuapp.com/login");
+//            Browser.getInstance().get("http://cafetownsend-angular-rails.herokuapp.com/login");
+            Browser.getInstance().get(mSettings.getmHomepage());
         }catch (Exception e){
-            LoginPage.LOG.error("Can't navigate to the login page");
+            LoginPage.LOG.error("Can't navigate to the login page:::"+mSettings.getmHomepage());
         }
     }
     public void GoTo(String site) {

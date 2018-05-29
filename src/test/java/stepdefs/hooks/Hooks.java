@@ -8,14 +8,15 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import stepdefs.base.BaseStep;
 
-public class Hooks {
+public class Hooks extends BaseStep {
 
-    private Settings mSettings;
+    private BaseStep mStep;
     private static Logger LOG;
 
-    public Hooks(Settings settings){
-        this.mSettings = settings;
+    public Hooks(BaseStep step){
+        this.mStep = step;
     }
 
     @Before
@@ -23,7 +24,7 @@ public class Hooks {
         if (Hooks.LOG.isDebugEnabled()){
             Hooks.LOG.debug("Starting scenario::::".concat(scenario.getName()));
         }
-        mSettings = new InitSystem().Init();
+        mStep.setmSettings(new InitSystem().Init());
     }
 
     @After
@@ -40,4 +41,5 @@ public class Hooks {
     static {
         LOG = LogManager.getLogger(Hooks.class);
     }
+
 }

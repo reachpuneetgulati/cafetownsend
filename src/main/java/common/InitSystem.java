@@ -24,6 +24,7 @@ public class InitSystem {
         Properties properties = loadProperties();
         if (settings != null) {
             settings.setVersion(Integer.parseInt(properties.getProperty("site.version","1")));
+            settings.setmHomepage(properties.getProperty(Constants.HOME_PAGE));
         }
         Browser.initBrowser(Constants.Driver.valueOf(properties.getProperty(Constants.USE_BROWSER,"FIREFOX")),properties);
         return settings;

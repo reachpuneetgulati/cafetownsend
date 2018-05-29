@@ -50,8 +50,6 @@ public class Browser {
                     co.addArguments("no-sandbox");
                 }
                 mDriver = new ChromeDriver(co);
-                mDriver.manage().timeouts().implicitlyWait(60L,TimeUnit.SECONDS);
-                mDriver.manage().timeouts().pageLoadTimeout(60L,TimeUnit.SECONDS);
             }
                 break;
             case FIREFOX:{
@@ -87,9 +85,14 @@ public class Browser {
                 break;
         }
 
+        if (mDriver == null)
+            return;
+
         try {
             mDriver.manage().window().maximize();
-            mDriver.manage().timeouts().setScriptTimeout(10L,TimeUnit.SECONDS);
+            mDriver.manage().timeouts().setScriptTimeout(Long.parseLong(properties.getProperty(Constants.SCRIPT_TIMEOUT,"10")),TimeUnit.SECONDS);
+            mDriver.manage().timeouts().implicitlyWait(Long.parseLong(properties.getProperty(Constants.IMPLICIT_TIMEOUT,"60")),TimeUnit.SECONDS);
+            mDriver.manage().timeouts().pageLoadTimeout(Long.parseLong(properties.getProperty(Constants.PAGELOAD_TIMEOUT,"60")),TimeUnit.SECONDS);
         }
         catch (Exception ignored) {}
     }

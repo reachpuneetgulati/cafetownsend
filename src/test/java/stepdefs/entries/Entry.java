@@ -11,12 +11,13 @@ import pages.AddEmployeePage;
 import pages.EditEmployeePage;
 import pages.LandingPage;
 import pages.LoginPage;
+import stepdefs.base.BaseStep;
 
-public class Entry {
+public class Entry extends BaseStep {
     private Settings mSettings;
 
-    public Entry(Settings settings){
-        this.mSettings = settings;
+    public Entry(BaseStep step){
+        this.mSettings = step.getmSettings();
     }
     
 

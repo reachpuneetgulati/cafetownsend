@@ -6,6 +6,10 @@ public class Constants
 {
     static final String SCREENSHOT_DIRECTORY = "screenshot.directory";
     static final String USE_BROWSER = "use.browser";
+    static final String IMPLICIT_TIMEOUT = "implicit.timeout";
+    static final String SCRIPT_TIMEOUT = "script.timeout";
+    static final String PAGELOAD_TIMEOUT = "pageload.timeout";
+    static final String HOME_PAGE = "home.page";
 
     public enum Driver
     {
