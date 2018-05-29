@@ -25,6 +25,7 @@ Feature: Login
        | username    | password   | warning                           |
        | luke        | Skywalker  | Invalid username or password!     |
        | Luke        | skywalker  | Invalid username or password!     |
+       | Lu ke       | Skywalker  | Invalid username or password!     |
        | Luke        |            | Please fill out this field.       |
        |             |            | Please fill out this field.       |
        |             | Skywalker  | Please fill out this field.       |
